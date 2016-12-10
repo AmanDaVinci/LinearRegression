@@ -1,4 +1,4 @@
-# <MachineLearning>
+# MachineLearning
 
 ## Linear Regression
 Linear Regression in multiple variables with
