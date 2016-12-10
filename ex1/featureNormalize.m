@@ -24,15 +24,25 @@ sigma = zeros(1, size(X, 2));
 %               each feature. 
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
-%       
+%
 
+% m is the Number of training sets
+m = size(X, 1);
+% n is the Number of features
+n =  size(X, 2);
 
+% Computing the mean and standard deviation
+for i = 1:n,
+	mu(i) = mean(X(:, i));
+	sigma(i) = std(X(:, i));
+end;
 
-
-
-
-
-
+% Feature scaling and normalization of X
+for i = 1:m,
+	for j = 1:n,
+		X_norm(i,j) = (X_norm(i,j) - mu(j)) / (sigma(j));
+	end;
+end;
 
 % ============================================================
 
