@@ -1,4 +1,2 @@
-# <MachineLearning>
-
-## LinearRegression
-Linear Regression algorithm to predict profit for a food truck
+# LinearRegression
+[MachineLearning] Linear Regression algorithm to predict profit for a food truck
