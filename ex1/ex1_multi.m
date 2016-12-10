@@ -104,7 +104,10 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = 0; % You should change this
+x0 = 1;
+x1 = (1650 - mu(1)) / sigma(1);
+x2 = (3 - mu(2)) / sigma(2);
+price = [x0 x1 x2] * theta; % You should change this
 
 
 % ============================================================
@@ -112,8 +115,72 @@ price = 0; % You should change this
 fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
          '(using gradient descent):\n $%f\n'], price);
 
-fprintf('Program paused. Press enter to continue.\n');
+fprintf('Program paused. Press enter to continue.\n\n');
 pause;
+
+%% =========== Experimenting with Learning Rate =============
+
+fprintf('Experimenting with Learning Rate...\n');
+
+% Various learning rates are tested on the data
+% And compared graphically to find the best
+%
+% Learning rates to be tested 
+% [Log scale on multiple steps of 3]
+
+alpha1 = 0.1;
+alpha2 = 0.3;
+alpha3 = 0.01;
+alpha4 = 0.03;
+
+% Init Theta for every learning rate
+% and run Gradient descent on each
+theta1 = zeros(3, 1);
+[theta1, J_history1] = gradientDescentMulti(X, y, theta, alpha1, num_iters);
+theta2 = zeros(3, 1);
+[theta2, J_history2] = gradientDescentMulti(X, y, theta, alpha2, num_iters);
+theta3 = zeros(3, 1);
+[theta3, J_history3] = gradientDescentMulti(X, y, theta, alpha3, num_iters);
+theta4 = zeros(3, 1);
+[theta4, J_history4] = gradientDescentMulti(X, y, theta, alpha4, num_iters);
+
+% Plot convergence graph of each
+% for graphical comparative study
+figure;
+plot(1:numel(J_history1), J_history1, 'b', 'DisplayName', 'alpha1 = 0.1');
+hold on;
+plot(1:numel(J_history2), J_history2, 'r', 'DisplayName', 'alpha2 = 0.3');
+plot(1:numel(J_history3), J_history3, 'k', 'DisplayName', 'alpha3 = 0.01');
+plot(1:numel(J_history4), J_history4, 'g', 'DisplayName', 'alpha1 = 0.03');
+xlabel('Number of iterations');
+ylabel('Cost J');
+legend('show');
+hold off;
+
+%% Best Alpha based on Observation
+bestAlpha = alpha2;
+bestTheta = theta2;
+
+% Display the best learning rate and theta
+fprintf('The best learning rate observed: \n');
+fprintf('Alpha: %f \n', bestAlpha);
+
+% Display gradient descent's result on the best alpha
+fprintf('Theta computed from the best learning rate on gradient descent: \n');
+fprintf(' %f \n', bestTheta);
+
+% Estimate the price of a 1650 sq-ft, 3 br house
+bestPrice = [x0 x1 x2] * bestTheta; % You should change this
+
+fprintf(['Predicted price of a 1650 sq-ft, 3 br house ' ...
+         '(using gradient descent on best learning rate):\n $%f\n'], bestPrice);
+
+fprintf('Program paused. Press enter to continue.\n\n');
+pause;
+
+fprintf('\n');
+
+%% ================= End of Expermentation ==================
 
 %% ================ Part 3: Normal Equations ================
 
