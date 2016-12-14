@@ -83,3 +83,6 @@ Visualizing J(theta_0, theta_1) ...
 ![Data](results/data.png)
 ![Cost Function](results/costFunc.png)
 ![Cost Function Contour](results/costContour.png)
+
+###TODO
+- Remove scafolding
